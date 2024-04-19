@@ -13,13 +13,13 @@ public class ElGamal {
     // a - wygenerowany klucz prywatny.
 
     // metoda zwraca losową liczbę pierwszą p.
-    public BigInteger generateP() {
+    private BigInteger generateP() {
         this.p = BigInteger.probablePrime(256, new Random());
         return this.p;
     }
 
     // metoda zwraca losową liczbę g.
-    public BigInteger generateG() {
+    private BigInteger generateG() {
         do {
             this.g = new BigInteger(p.bitLength(), new Random());
         } while (this.g.compareTo(BigInteger.ONE) <= 0 || this.g.compareTo(p.subtract(BigInteger.ONE)) >= 0);
@@ -28,7 +28,7 @@ public class ElGamal {
     }
 
     // metoda znajduje liczbe a.
-    public BigInteger generateA() {
+    private BigInteger generateA() {
         do {
             this.a = new BigInteger(this.p.bitLength(), new Random());
         } while (this.a.compareTo(BigInteger.ONE) <= 0 || this.a.compareTo(this.p.subtract(BigInteger.ONE)) >= 0);
@@ -37,7 +37,14 @@ public class ElGamal {
     }
 
     // metoda oblicza liczbę h.
-    public BigInteger generateH() {
+    private BigInteger generateH() {
         return this.h = this.g.modPow(this.a, this.p);
+    }
+
+    public void generateKeys() {
+        this.p = generateP();
+        this.g = generateG();
+        this.a = generateA();
+        this.h = generateH();
     }
 }
