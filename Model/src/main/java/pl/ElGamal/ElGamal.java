@@ -8,6 +8,7 @@ public class ElGamal {
     public BigInteger g;
     public BigInteger a;
     public BigInteger h;
+    public BigInteger r;
 
     // p, g, h - wygenerowane klucze publiczne.
     // a - wygenerowany klucz prywatny.
@@ -49,13 +50,18 @@ public class ElGamal {
         this.h = generateH();
     }
 
+    private BigInteger generateR() {
+        do {
+            this.r = new BigInteger(this.p.bitLength(), new Random());
+        } while (this.r.compareTo(BigInteger.ONE) <= 0 || this.r.compareTo(this.p.subtract(BigInteger.ONE)) >= 0);
+
+        return this.r;
+    }
+
     // metoda szyfruje liczbe m zgodnie z działaniem algorytmu ElGamala.
     public BigInteger[] encrypt(BigInteger m) {
-        BigInteger r = null;
         if (m.compareTo(this.p) < 0) {
-            do {
-                r = new BigInteger(this.p.bitLength(), new Random());
-            } while (r.compareTo(BigInteger.ONE) <= 0 || r.compareTo(this.p.subtract(BigInteger.ONE)) >= 0);
+            this.r = generateR();
         }
 
         BigInteger c1 = this.g.modPow(r, this.p);
