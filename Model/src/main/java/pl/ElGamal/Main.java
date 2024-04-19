@@ -8,11 +8,6 @@ public class Main {
 
         elgamal.generateKeys();
 
-        System.out.println("p: " + elgamal.p);
-        System.out.println("g: " + elgamal.g);
-        System.out.println("a: " + elgamal.a);
-        System.out.println("h: " + elgamal.h);
-
         BigInteger m = new BigInteger("1242252");
 
         BigInteger[] C = elgamal.encrypt(m);
@@ -21,5 +16,10 @@ public class Main {
         for (BigInteger value : C) {
             System.out.println(value);
         }
+
+        BigInteger D = elgamal.decrypt(C);
+
+        System.out.println("Decrypted value:");
+        System.out.println(D);
     }
 }

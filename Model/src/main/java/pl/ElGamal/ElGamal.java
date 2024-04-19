@@ -4,11 +4,11 @@ import java.math.BigInteger;
 import java.util.Random;
 
 public class ElGamal {
-    public BigInteger p;
-    public BigInteger g;
-    public BigInteger a;
-    public BigInteger h;
-    public BigInteger r;
+    private BigInteger p;
+    private BigInteger g;
+    private BigInteger a;
+    private BigInteger h;
+    private BigInteger r;
 
     // p, g, h - wygenerowane klucze publiczne.
     // a - wygenerowany klucz prywatny.
@@ -50,6 +50,7 @@ public class ElGamal {
         this.h = generateH();
     }
 
+    //metoda generuje liczbę r potrzebną do szyfrowania.
     private BigInteger generateR() {
         do {
             this.r = new BigInteger(this.p.bitLength(), new Random());
@@ -65,8 +66,19 @@ public class ElGamal {
         }
 
         BigInteger c1 = this.g.modPow(r, this.p);
-        BigInteger c2 = this.h.modPow(r, this.p);
+        BigInteger c2 = m.multiply(this.h.modPow(r, this.p));
 
         return new BigInteger[]{c1, c2};
+    }
+
+    //metoda deszyfruje zgodnie z działaniem algorytmu ElGamala.
+    public BigInteger decrypt(BigInteger[] C) {
+        BigInteger c1 = C[0];
+        BigInteger c2 = C[1];
+
+        BigInteger c1powA = c1.modPow(this.a, this.p);
+        BigInteger inverse = c1powA.modInverse(this.p);
+
+        return c2.multiply(inverse).mod(this.p);
     }
 }
