@@ -6,12 +6,20 @@ public class Main {
     public static void main(String[] args){
         ElGamal elgamal = new ElGamal();
 
-        BigInteger dupa = elgamal.generateP();
+        BigInteger p = elgamal.generateP();
 
-        System.out.println(dupa);
+        System.out.println("p: " + p);
 
         BigInteger g = elgamal.generateG();
 
-        System.out.println(g);
+        System.out.println("g: " + g);
+
+        BigInteger a = elgamal.generateA();
+
+        System.out.println("a: " + a);
+
+        if (BigInteger.ONE.compareTo(g) < 0 && g.compareTo(p.subtract(BigInteger.ONE)) < 0) {
+            System.out.println("DUPA");
+        }
     }
 }
