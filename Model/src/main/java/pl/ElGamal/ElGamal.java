@@ -1,6 +1,7 @@
 package pl.ElGamal;
 
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 public class ElGamal {
@@ -80,5 +81,17 @@ public class ElGamal {
         BigInteger inverse = c1powA.modInverse(this.p);
 
         return c2.multiply(inverse).mod(this.p);
+    }
+
+    // metoda zamieniająca text na BigInteger.
+    public BigInteger textToBigInteger(String text) {
+        byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
+        return new BigInteger(bytes);
+    }
+
+    // metoda zamieniająca BigInteger na text.
+    public String bigIntegerToText(BigInteger bigInteger) {
+        byte[] bytes = bigInteger.toByteArray();
+        return new String(bytes, StandardCharsets.UTF_8);
     }
 }

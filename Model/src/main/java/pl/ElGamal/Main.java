@@ -8,7 +8,11 @@ public class Main {
 
         elgamal.generateKeys();
 
-        BigInteger m = new BigInteger("1242252");
+        //BigInteger m = new BigInteger("1242252");
+
+        String dupa = "Dupa123!";
+
+        BigInteger m = elgamal.textToBigInteger(dupa);
 
         BigInteger[] C = elgamal.encrypt(m);
 
@@ -21,5 +25,9 @@ public class Main {
 
         System.out.println("Decrypted value:");
         System.out.println(D);
+
+        String dupa2 = elgamal.bigIntegerToText(D);
+
+        System.out.println(dupa2);
     }
 }
