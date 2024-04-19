@@ -9,6 +9,9 @@ public class ElGamal {
     public BigInteger a;
     public BigInteger h;
 
+    // p, g, h - wygenerowane klucze publiczne.
+    // a - wygenerowany klucz prywatny.
+
     // metoda zwraca losową liczbę pierwszą p.
     public BigInteger generateP() {
         this.p = BigInteger.probablePrime(256, new Random());
@@ -33,6 +36,7 @@ public class ElGamal {
         return this.a;
     }
 
+    // metoda oblicza liczbę h.
     public BigInteger generateH() {
         return this.h = this.g.modPow(this.a, this.p);
     }
