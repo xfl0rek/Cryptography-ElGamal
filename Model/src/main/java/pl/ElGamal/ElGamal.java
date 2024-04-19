@@ -94,4 +94,20 @@ public class ElGamal {
         byte[] bytes = bigInteger.toByteArray();
         return new String(bytes, StandardCharsets.UTF_8);
     }
+
+    public BigInteger getP() {
+        return p;
+    }
+
+    public BigInteger getG() {
+        return g;
+    }
+
+    public BigInteger getA() {
+        return a;
+    }
+
+    public BigInteger getH() {
+        return h;
+    }
 }
