@@ -12,5 +12,14 @@ public class Main {
         System.out.println("g: " + elgamal.g);
         System.out.println("a: " + elgamal.a);
         System.out.println("h: " + elgamal.h);
+
+        BigInteger m = new BigInteger("1242252");
+
+        BigInteger[] C = elgamal.encrypt(m);
+
+        System.out.println("Encrypted values:");
+        for (BigInteger value : C) {
+            System.out.println(value);
+        }
     }
 }

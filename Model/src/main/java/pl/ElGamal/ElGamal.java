@@ -48,4 +48,19 @@ public class ElGamal {
         this.a = generateA();
         this.h = generateH();
     }
+
+    // metoda szyfruje liczbe m zgodnie z działaniem algorytmu ElGamala.
+    public BigInteger[] encrypt(BigInteger m) {
+        BigInteger r = null;
+        if (m.compareTo(this.p) < 0) {
+            do {
+                r = new BigInteger(this.p.bitLength(), new Random());
+            } while (r.compareTo(BigInteger.ONE) <= 0 || r.compareTo(this.p.subtract(BigInteger.ONE)) >= 0);
+        }
+
+        BigInteger c1 = this.g.modPow(r, this.p);
+        BigInteger c2 = this.h.modPow(r, this.p);
+
+        return new BigInteger[]{c1, c2};
+    }
 }
