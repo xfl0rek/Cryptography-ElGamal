@@ -32,4 +32,8 @@ public class ElGamal {
 
         return this.a;
     }
+
+    public BigInteger generateH() {
+        return this.h = this.g.modPow(this.a, this.p);
+    }
 }

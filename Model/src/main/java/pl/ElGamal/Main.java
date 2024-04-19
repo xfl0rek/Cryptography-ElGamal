@@ -18,6 +18,10 @@ public class Main {
 
         System.out.println("a: " + a);
 
+        BigInteger h = elgamal.generateH();
+
+        System.out.println("h: " + h);
+
         if (BigInteger.ONE.compareTo(g) < 0 && g.compareTo(p.subtract(BigInteger.ONE)) < 0) {
             System.out.println("DUPA");
         }
