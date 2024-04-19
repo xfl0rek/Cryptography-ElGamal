@@ -41,6 +41,7 @@ public class ElGamal {
         return this.h = this.g.modPow(this.a, this.p);
     }
 
+    // metoda generuje 3 klucze publicze (p, g, h) oraz klucz prywatny a.
     public void generateKeys() {
         this.p = generateP();
         this.g = generateG();
