@@ -9,5 +9,9 @@ public class Main {
         BigInteger dupa = elgamal.generateP();
 
         System.out.println(dupa);
+
+        BigInteger g = elgamal.generateG();
+
+        System.out.println(g);
     }
 }
