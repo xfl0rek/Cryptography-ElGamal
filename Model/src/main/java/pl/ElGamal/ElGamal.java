@@ -95,6 +95,7 @@ public class ElGamal {
         return new String(bytes, StandardCharsets.UTF_8);
     }
 
+    // gettery potrzebne do controllera.
     public BigInteger getP() {
         return p;
     }
