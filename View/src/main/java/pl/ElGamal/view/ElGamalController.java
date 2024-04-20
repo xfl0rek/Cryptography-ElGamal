@@ -64,6 +64,29 @@ public class ElGamalController {
         }
     }
 
+    @FXML
+    public void decryptMessage() {
+        try {
+            String encryptedTextStr = readText.getText();
+            encryptedTextStr = encryptedTextStr.substring(1, encryptedTextStr.length() - 1);
+
+            String[] encryptedValues = encryptedTextStr.split(", ");
+            BigInteger[] encryptedBigIntegers = new BigInteger[encryptedValues.length];
+
+            for (int i = 0; i < encryptedValues.length; i++) {
+                encryptedBigIntegers[i] = new BigInteger(encryptedValues[i]);
+            }
+
+            BigInteger decryptedValue = elGamal.decrypt(encryptedBigIntegers);
+
+            String decryptedText = bigIntegerToText(decryptedValue);
+
+            writeText.setText(decryptedText);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // metoda zamieniająca text na BigInteger.
     private BigInteger textToBigInteger(String text) {
         byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
