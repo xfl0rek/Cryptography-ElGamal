@@ -103,34 +103,64 @@ public class ElGamalController {
 
         try {
             byte[] fileBytes = FileUtils.readFileToByteArray(selectedFile);
+            int blockSize = elGamal.getP().bitLength() / 8;
+            int numBlocks = (fileBytes.length + blockSize - 1) / blockSize;
 
-            BigInteger fileBytesToBigInteger = new BigInteger(1, Arrays.copyOf(fileBytes, 32));
+            StringBuilder encryptedData = new StringBuilder();
 
-            System.out.println(fileBytesToBigInteger);
-
-            BigInteger[] encryptedText = elGamal.encrypt(fileBytesToBigInteger);
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            DataOutputStream dos = new DataOutputStream(baos);
-
-            dos.writeInt(encryptedText[0].toByteArray().length);
-            dos.writeInt(encryptedText[1].toByteArray().length);
-
-            dos.write(encryptedText[0].toByteArray());
-            dos.write(encryptedText[1].toByteArray());
-
-            byte[] encryptedBigIntegerToBytes = baos.toByteArray();
+            for (int i = 0; i < numBlocks; i++) {
+                byte[] block = Arrays.copyOfRange(fileBytes, i * blockSize, Math.min((i + 1) * blockSize, fileBytes.length));
+                BigInteger blockBigInteger = new BigInteger(1, block);
+                BigInteger[] encryptedBlock = elGamal.encrypt(blockBigInteger);
+                encryptedData.append(encryptedBlock[0]).append("\n").append(encryptedBlock[1]).append("\n");
+            }
 
             File destination = fileChooser.showSaveDialog(new Stage());
-            FileUtils.writeByteArrayToFile(destination, encryptedBigIntegerToBytes);
+            FileUtils.writeStringToFile(destination, encryptedData.toString(), StandardCharsets.UTF_8);
 
             fileStatus.setText("Zaszyfrowano plik.");
 
         } catch (Exception e) {
             e.printStackTrace();
-            fileStatus.setText("Nie udało się zaszyfrować");
+            fileStatus.setText("Nie udało się zaszyfrować pliku.");
         }
     }
+
+
+    @FXML
+    public void decryptFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Proszę wybrać plik");
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+
+        try {
+            String encryptedText = FileUtils.readFileToString(selectedFile, StandardCharsets.UTF_8);
+            String[] encryptedLines = encryptedText.split("\n");
+
+            ByteArrayOutputStream decryptedBaos = new ByteArrayOutputStream();
+
+            for (int i = 0; i < encryptedLines.length; i += 2) {
+                BigInteger c1 = new BigInteger(encryptedLines[i]);
+                BigInteger c2 = new BigInteger(encryptedLines[i + 1]);
+                BigInteger[] encryptedData = {c1, c2};
+                BigInteger decryptedValue = elGamal.decrypt(encryptedData);
+                byte[] decryptedBytes = decryptedValue.toByteArray();
+                decryptedBaos.write(decryptedBytes);
+            }
+
+            byte[] decryptedData = decryptedBaos.toByteArray();
+
+            File destination = fileChooser.showSaveDialog(new Stage());
+            FileUtils.writeByteArrayToFile(destination, decryptedData);
+
+            fileStatus.setText("Odszyfrowano plik.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            fileStatus.setText("Nie udało się odszyfrować pliku.");
+        }
+    }
+
 
     // metoda zamieniająca text na BigInteger.
     private BigInteger textToBigInteger(String text) {

@@ -26,7 +26,7 @@
       <Button layoutX="262.0" layoutY="286.0" mnemonicParsing="false" onAction="#decryptMessage" text="Deszyfruj" />
       <Text layoutX="431.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Działania na plikach" />
       <Button layoutX="394.0" layoutY="40.0" mnemonicParsing="false" text="Szyfruj plik" onAction="#encryptFile"/>
-      <Button layoutX="483.0" layoutY="40.0" mnemonicParsing="false" text="Deszyfruj plik" />
+      <Button layoutX="483.0" layoutY="40.0" mnemonicParsing="false" text="Deszyfruj plik" onAction="#decryptFile"/>
       <Label fx:id="fileStatus" layoutX="398.0" layoutY="77.0" prefHeight="18.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
