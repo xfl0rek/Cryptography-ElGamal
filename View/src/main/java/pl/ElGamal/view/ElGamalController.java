@@ -1,10 +1,15 @@
 package pl.ElGamal.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
 import pl.ElGamal.ElGamal;
 
+import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -29,6 +34,9 @@ public class ElGamalController {
 
     @FXML
     private TextArea readText;
+
+    @FXML
+    private Label fileStatus;
 
     public ElGamalController() {
         this.elGamal = new ElGamal();
@@ -84,6 +92,43 @@ public class ElGamalController {
             writeText.setText(decryptedText);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void encryptFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Proszę wybrać plik");
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+
+        try {
+            byte[] fileBytes = FileUtils.readFileToByteArray(selectedFile);
+
+            BigInteger fileBytesToBigInteger = new BigInteger(1, Arrays.copyOf(fileBytes, 32));
+
+            System.out.println(fileBytesToBigInteger);
+
+            BigInteger[] encryptedText = elGamal.encrypt(fileBytesToBigInteger);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            DataOutputStream dos = new DataOutputStream(baos);
+
+            dos.writeInt(encryptedText[0].toByteArray().length);
+            dos.writeInt(encryptedText[1].toByteArray().length);
+
+            dos.write(encryptedText[0].toByteArray());
+            dos.write(encryptedText[1].toByteArray());
+
+            byte[] encryptedBigIntegerToBytes = baos.toByteArray();
+
+            File destination = fileChooser.showSaveDialog(new Stage());
+            FileUtils.writeByteArrayToFile(destination, encryptedBigIntegerToBytes);
+
+            fileStatus.setText("Zaszyfrowano plik.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            fileStatus.setText("Nie udało się zaszyfrować");
         }
     }
 
