@@ -20,9 +20,9 @@
       <TextField fx:id="h" layoutX="31.0" layoutY="154.0" />
       <Text layoutX="14.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="h" />
       <Button layoutX="205.0" layoutY="90.0" mnemonicParsing="false" text="Generuj klucze" onAction="#generateKeys"/>
-      <TextArea layoutX="31.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" />
-      <TextArea layoutX="368.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button layoutX="268.0" layoutY="246.0" mnemonicParsing="false" text="Szyfruj" />
+      <TextArea fx:id="writeText" layoutX="31.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="readText" layoutX="368.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="268.0" layoutY="246.0" mnemonicParsing="false" text="Szyfruj" onAction="#encryptMessage"/>
       <Button layoutX="262.0" layoutY="286.0" mnemonicParsing="false" text="Deszyfruj" />
    </children>
 </AnchorPane>
