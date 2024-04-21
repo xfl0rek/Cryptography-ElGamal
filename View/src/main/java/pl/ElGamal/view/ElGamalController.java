@@ -173,4 +173,24 @@ public class ElGamalController {
         byte[] bytes = bigInteger.toByteArray();
         return new String(bytes, StandardCharsets.UTF_8);
     }
+
+    // Metoda konwertująca tablicę obiektów BigInteger na łańcuch szesnastkowy.
+    public String bigIntegerArrayToHexString(BigInteger[] bigIntegerArray) {
+        StringBuilder hexStringBuilder = new StringBuilder();
+        for (BigInteger i : bigIntegerArray) {
+            hexStringBuilder.append(i.toString(16));
+            hexStringBuilder.append("  ");
+        }
+        return hexStringBuilder.toString();
+    }
+
+    // Metoda konwertująca łańcuch szesnastkowy na tablicę obiektów BigInteger.
+    public BigInteger[] hexStringToBigIntegerArray(String hexString) {
+        String[] hexValues = hexString.split("  ");
+        BigInteger[] bigIntegerArray = new BigInteger[hexValues.length];
+        for (int i = 0; i < hexValues.length; i++) {
+            bigIntegerArray[i] = new BigInteger(hexValues[i], 16);
+        }
+        return bigIntegerArray;
+    }
 }
