@@ -61,7 +61,7 @@ public class ElGamal {
 
     // metoda szyfruje liczbe m zgodnie z działaniem algorytmu ElGamala.
     public BigInteger[] encrypt(byte[] message) {
-        BigInteger m = new BigInteger(message);
+        BigInteger m = new BigInteger(1, message);
         if (m.compareTo(this.p) < 0) {
             this.r = generateR();
         }
