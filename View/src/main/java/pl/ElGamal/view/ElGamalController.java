@@ -93,6 +93,7 @@ public class ElGamalController {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(encodedOutputFile))) {
             bufferedWriter.write(hexStringEncryptedMessage);
         }
+        encryptFileStatus.setText("Udało się zaszyfrować plik.");
     }
 
     @FXML
@@ -108,6 +109,7 @@ public class ElGamalController {
         BigInteger[] message = hexStringToBigIntegerArray(encryptedMessageHex);
         byte[] decryptedMessage = elGamal.decrypt(message);
         Files.write(Paths.get(decodedOutputFile.toURI()), decryptedMessage);
+        decryptFileStatus.setText("Udało się odszyfrować plik.");
     }
 
     private File chooseFile() {
