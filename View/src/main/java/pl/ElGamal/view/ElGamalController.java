@@ -8,9 +8,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import pl.ElGamal.ElGamal;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class ElGamalController {
     ElGamal elGamal;
@@ -84,8 +89,13 @@ public class ElGamalController {
     }
 
     @FXML
-    public void encryptFileButtonClick() {
-
+    public void encryptFileButtonClick() throws IOException {
+        byte[] message = Files.readAllBytes(Paths.get(decodedInputFile.toURI()));
+        BigInteger[] encryptedText = elGamal.encrypt(message);
+        String hexStringEncryptedMessage = bigIntegerArrayToHexString(encryptedText);
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(encodedOutputFile))) {
+            bufferedWriter.write(hexStringEncryptedMessage);
+        }
     }
 
     @FXML
@@ -96,7 +106,7 @@ public class ElGamalController {
     private File chooseFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-        fileChooser.setTitle("Wybierz plik do zapisu");
+        fileChooser.setTitle("Wybierz plik do zapisu.");
         return fileChooser.showSaveDialog(new Stage());
     }
 
@@ -109,13 +119,13 @@ public class ElGamalController {
     public void decodedInputFileButtonClick() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-        fileChooser.setTitle("Wybierz jawny plik");
+        fileChooser.setTitle("Wybierz jawny plik.");
         decodedInputFile = fileChooser.showOpenDialog(new Stage());
     }
 
     @FXML
     public void encodedOutputFileButtonClick() {
-
+        encodedOutputFile = chooseFile();
     }
 
     @FXML

@@ -26,10 +26,10 @@
       <Button layoutX="262.0" layoutY="286.0" mnemonicParsing="false" onAction="#decryptMessage" text="Deszyfruj" />
       <Button layoutX="61.0" layoutY="434.0" mnemonicParsing="false" onAction="#decodedInputFileButtonClick" text="Wybierz plik do odczytu" />
       <Button layoutX="276.0" layoutY="434.0" mnemonicParsing="false" onAction="#encryptFileButtonClick" text="Szyfruj   " />
-      <Button layoutX="402.0" layoutY="434.0" mnemonicParsing="false" onAction="#decodedOutputFileButtonClick" text="Wybierz plik do zapisu  " />
+      <Button layoutX="402.0" layoutY="434.0" mnemonicParsing="false" onAction="#encodedOutputFileButtonClick" text="Wybierz plik do zapisu  " />
       <Text layoutX="249.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Operacje na plikach" />
       <Label fx:id="encryptFileStatus" layoutX="206.0" layoutY="470.0" prefHeight="18.0" prefWidth="193.0" />
-      <Button layoutX="61.0" layoutY="501.0" mnemonicParsing="false" onAction="#encodedOutputFileButtonClick" text="Wybierz plik do zapisu  " />
+      <Button layoutX="61.0" layoutY="501.0" mnemonicParsing="false" onAction="#decodedOutputFileButtonClick" text="Wybierz plik do zapisu  " />
       <Button layoutX="276.0" layoutY="501.0" mnemonicParsing="false" onAction="#decryptFileButtonClick" text="Deszyfruj" />
       <Button layoutX="402.0" layoutY="501.0" mnemonicParsing="false" onAction="#encodedInputFileButtonClick" text="Wybierz plik do odczytu" />
       <Label fx:id="decryptFileStatus" layoutX="206.0" layoutY="537.0" prefHeight="18.0" prefWidth="193.0" />
