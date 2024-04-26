@@ -11,7 +11,7 @@ public class StartApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("elgamal.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 650, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 650, 600);
         stage.setTitle("ElGamal");
         stage.setScene(scene);
         stage.show();

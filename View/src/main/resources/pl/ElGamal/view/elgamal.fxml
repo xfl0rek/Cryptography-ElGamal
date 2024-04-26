@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.ElGamal.view.ElGamalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="568.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.ElGamal.view.ElGamalController">
    <children>
       <Label layoutX="294.0" layoutY="85.0" prefHeight="18.0" prefWidth="226.0" />
       <TextField fx:id="p" layoutX="31.0" layoutY="32.0" />
@@ -24,9 +24,14 @@
       <TextArea fx:id="readText" layoutX="368.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" />
       <Button layoutX="268.0" layoutY="246.0" mnemonicParsing="false" onAction="#encryptMessage" text="Szyfruj" />
       <Button layoutX="262.0" layoutY="286.0" mnemonicParsing="false" onAction="#decryptMessage" text="Deszyfruj" />
-      <Text layoutX="431.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Działania na plikach" />
-      <Button layoutX="394.0" layoutY="40.0" mnemonicParsing="false" text="Szyfruj plik" onAction="#encryptFile"/>
-      <Button layoutX="483.0" layoutY="40.0" mnemonicParsing="false" text="Deszyfruj plik" onAction="#decryptFile"/>
-      <Label fx:id="fileStatus" layoutX="398.0" layoutY="77.0" prefHeight="18.0" prefWidth="150.0" />
+      <Button layoutX="61.0" layoutY="434.0" mnemonicParsing="false" onAction="#decodedInputFileButtonClick" text="Wybierz plik do odczytu" />
+      <Button layoutX="276.0" layoutY="434.0" mnemonicParsing="false" onAction="#encryptFileButtonClick" text="Szyfruj   " />
+      <Button layoutX="402.0" layoutY="434.0" mnemonicParsing="false" onAction="#decodedOutputFileButtonClick" text="Wybierz plik do zapisu  " />
+      <Text layoutX="249.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Operacje na plikach" />
+      <Label fx:id="encryptFileStatus" layoutX="206.0" layoutY="470.0" prefHeight="18.0" prefWidth="193.0" />
+      <Button layoutX="61.0" layoutY="501.0" mnemonicParsing="false" onAction="#encodedOutputFileButtonClick" text="Wybierz plik do zapisu  " />
+      <Button layoutX="276.0" layoutY="501.0" mnemonicParsing="false" onAction="#decryptFileButtonClick" text="Deszyfruj" />
+      <Button layoutX="402.0" layoutY="501.0" mnemonicParsing="false" onAction="#encodedInputFileButtonClick" text="Wybierz plik do odczytu" />
+      <Label fx:id="decryptFileStatus" layoutX="206.0" layoutY="537.0" prefHeight="18.0" prefWidth="193.0" />
    </children>
 </AnchorPane>
