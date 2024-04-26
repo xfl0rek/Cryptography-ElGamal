@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import pl.ElGamal.ElGamal;
 
 import java.io.File;
@@ -92,7 +94,10 @@ public class ElGamalController {
     }
 
     private File chooseFile() {
-        return null;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        fileChooser.setTitle("Wybierz plik do zapisu");
+        return fileChooser.showSaveDialog(new Stage());
     }
 
     @FXML
