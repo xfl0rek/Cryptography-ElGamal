@@ -112,7 +112,10 @@ public class ElGamalController {
 
     @FXML
     public void encodedInputFileButtonClick() {
-
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        fileChooser.setTitle("Wybierz zaszyfrowany plik");
+        encodedInputFile = fileChooser.showOpenDialog(new Stage());
     }
 
     @FXML
@@ -130,7 +133,7 @@ public class ElGamalController {
 
     @FXML
     public void decodedOutputFileButtonClick() {
-
+        decodedOutputFile = chooseFile();
     }
 
     private String bigIntegerArrayToHexString(BigInteger[] array) {
