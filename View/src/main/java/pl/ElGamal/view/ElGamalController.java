@@ -107,7 +107,10 @@ public class ElGamalController {
 
     @FXML
     public void decodedInputFileButtonClick() {
-
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        fileChooser.setTitle("Wybierz jawny plik");
+        decodedInputFile = fileChooser.showOpenDialog(new Stage());
     }
 
     @FXML
