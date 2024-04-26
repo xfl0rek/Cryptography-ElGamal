@@ -67,7 +67,7 @@ public class ElGamal {
         }
 
         BigInteger c1 = this.g.modPow(r, this.p);
-        BigInteger c2 = m.multiply(this.h.modPow(r, this.p));
+        BigInteger c2 = m.multiply(this.h.modPow(r, this.p)).mod(this.p);
 
         return new BigInteger[]{c1, c2};
     }

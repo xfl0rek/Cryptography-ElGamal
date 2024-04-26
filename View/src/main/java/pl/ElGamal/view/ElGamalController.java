@@ -62,10 +62,8 @@ public class ElGamalController {
         try {
             String text = writeText.getText();
             byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
-
             BigInteger[] encryptedText = elGamal.encrypt(bytes);
-
-            readText.setText(Arrays.toString(encryptedText));
+            readText.setText(bigIntegerArrayToHexString(encryptedText));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,25 +72,10 @@ public class ElGamalController {
 
     @FXML
     public void decryptMessage() {
-        try {
-            String encryptedTextStr = readText.getText();
-            encryptedTextStr = encryptedTextStr.substring(1, encryptedTextStr.length() - 1);
-
-            String[] encryptedValues = encryptedTextStr.split(", ");
-            BigInteger[] encryptedBigIntegers = new BigInteger[encryptedValues.length];
-
-            for (int i = 0; i < encryptedValues.length; i++) {
-                encryptedBigIntegers[i] = new BigInteger(encryptedValues[i]);
-            }
-
-            byte[] decryptedValue = elGamal.decrypt(encryptedBigIntegers);
-
-            String decryptedText = new String(decryptedValue, StandardCharsets.UTF_8);
-
-            writeText.setText(decryptedText);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String encryptedText = readText.getText();
+        BigInteger[] message = hexStringToBigIntegerArray(encryptedText);
+        byte[] decryptedText = elGamal.decrypt(message);
+        writeText.setText(new String(decryptedText, StandardCharsets.UTF_8));
     }
 
     @FXML
@@ -104,5 +87,27 @@ public class ElGamalController {
     @FXML
     public void decryptFile() {
 
+    }
+
+    private String bigIntegerArrayToHexString(BigInteger[] array) {
+        StringBuilder hexString = new StringBuilder();
+        for (BigInteger num : array) {
+            hexString.append(num.toString(16)); // Konwersja na hex
+        }
+        return hexString.toString();
+    }
+
+    private BigInteger[] hexStringToBigIntegerArray(String hexString) {
+        int length = hexString.length();
+        int numBigIntegers = (int) Math.ceil((double) length / 64);
+        BigInteger[] array = new BigInteger[numBigIntegers];
+
+        for (int i = 0; i < numBigIntegers; i++) {
+            int startIndex = i * 64;
+            int endIndex = Math.min(startIndex + 64, length);
+            String hexNumber = hexString.substring(startIndex, endIndex);
+            array[i] = new BigInteger(hexNumber, 16);
+        }
+        return array;
     }
 }
