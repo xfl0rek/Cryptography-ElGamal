@@ -6,7 +6,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.apache.commons.io.FileUtils;
 import pl.ElGamal.ElGamal;
 
 import java.io.*;
@@ -73,15 +72,81 @@ public class ElGamalController {
         writeText.setText(new String(decryptedText, StandardCharsets.UTF_8));
     }
 
-    @FXML
     public void encryptFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Proszę wybrać plik");
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
 
+        try {
+            FileInputStream fis = new FileInputStream(selectedFile);
+            byte[] fileBytes = fis.readAllBytes();
+            fis.close();
+
+            int blockSize = (elGamal.getP().bitLength() - 1) / 8;
+            int numBlocks = (fileBytes.length + blockSize - 1) / blockSize;
+
+            ByteArrayOutputStream encryptedBaos = new ByteArrayOutputStream();
+
+            for (int i = 0; i < numBlocks; i++) {
+                byte[] block = Arrays.copyOfRange(fileBytes, i * blockSize, Math.min((i + 1) * blockSize, fileBytes.length));
+                BigInteger[] encryptedBlock = elGamal.encrypt(block);
+                for (BigInteger num : encryptedBlock) {
+                    byte[] numBytes = num.toByteArray();
+                    encryptedBaos.write(numBytes.length);
+                    encryptedBaos.write(numBytes);
+                }
+            }
+
+            File destination = fileChooser.showSaveDialog(new Stage());
+            FileOutputStream fos = new FileOutputStream(destination);
+            encryptedBaos.writeTo(fos);
+            fos.close();
+
+            fileStatus.setText("Zaszyfrowano plik.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            fileStatus.setText("Nie udało się zaszyfrować pliku.");
+        }
     }
 
-
-    @FXML
     public void decryptFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Proszę wybrać plik");
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
 
+        try {
+            FileInputStream fis = new FileInputStream(selectedFile);
+            ByteArrayOutputStream decryptedBaos = new ByteArrayOutputStream();
+
+            while (fis.available() > 0) {
+                int c1Length = fis.read();
+                byte[] c1Bytes = new byte[c1Length];
+                fis.read(c1Bytes);
+                BigInteger c1 = new BigInteger(c1Bytes);
+
+                int c2Length = fis.read();
+                byte[] c2Bytes = new byte[c2Length];
+                fis.read(c2Bytes);
+                BigInteger c2 = new BigInteger(c2Bytes);
+
+                byte[] block = elGamal.decrypt(new BigInteger[]{c1, c2});
+                decryptedBaos.write(block);
+            }
+
+            fis.close();
+
+            File destination = fileChooser.showSaveDialog(new Stage());
+            FileOutputStream fos = new FileOutputStream(destination);
+            decryptedBaos.writeTo(fos);
+            fos.close();
+
+            fileStatus.setText("Odszyfrowano plik.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            fileStatus.setText("Nie udało się odszyfrować pliku.");
+        }
     }
 
     private String bigIntegerArrayToHexString(BigInteger[] array) {
