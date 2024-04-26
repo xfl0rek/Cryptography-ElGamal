@@ -8,10 +8,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import pl.ElGamal.ElGamal;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -99,8 +96,18 @@ public class ElGamalController {
     }
 
     @FXML
-    public void decryptFileButtonClick() {
-
+    public void decryptFileButtonClick() throws IOException {
+        StringBuilder fileContent = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(encodedInputFile))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                fileContent.append(line);
+            }
+        }
+        String encryptedMessageHex = fileContent.toString();
+        BigInteger[] message = hexStringToBigIntegerArray(encryptedMessageHex);
+        byte[] decryptedMessage = elGamal.decrypt(message);
+        Files.write(Paths.get(decodedOutputFile.toURI()), decryptedMessage);
     }
 
     private File chooseFile() {
