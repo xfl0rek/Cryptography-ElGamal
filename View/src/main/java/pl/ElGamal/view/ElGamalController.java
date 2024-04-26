@@ -59,15 +59,10 @@ public class ElGamalController {
 
     @FXML
     public void encryptMessage() {
-        try {
-            String text = writeText.getText();
-            byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
-            BigInteger[] encryptedText = elGamal.encrypt(bytes);
-            readText.setText(bigIntegerArrayToHexString(encryptedText));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String text = writeText.getText();
+        byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
+        BigInteger[] encryptedText = elGamal.encrypt(bytes);
+        readText.setText(bigIntegerArrayToHexString(encryptedText));
     }
 
     @FXML
@@ -92,7 +87,7 @@ public class ElGamalController {
     private String bigIntegerArrayToHexString(BigInteger[] array) {
         StringBuilder hexString = new StringBuilder();
         for (BigInteger num : array) {
-            hexString.append(num.toString(16)); // Konwersja na hex
+            hexString.append(num.toString(16));
         }
         return hexString.toString();
     }
