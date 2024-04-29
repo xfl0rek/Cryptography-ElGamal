@@ -55,9 +55,13 @@ public class ElGamal {
         }
 
         BigInteger c1 = this.g.modPow(r, this.p);
-        BigInteger c2 = m.multiply(this.h.modPow(r, this.p)).mod(this.p);
+        BigInteger c2 = m.multiply(this.h.modPow(r, this.p));
 
-        return new BigInteger[]{c1, c2};
+        BigInteger[] result = new BigInteger[2];
+        result[0] = c1;
+        result[1] = c2;
+
+        return result;
     }
 
     //metoda deszyfruje zgodnie z działaniem algorytmu ElGamala.
