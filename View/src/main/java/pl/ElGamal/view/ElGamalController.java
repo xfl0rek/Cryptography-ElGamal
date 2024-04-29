@@ -63,10 +63,10 @@ public class ElGamalController {
         BigInteger aValue = elGamal.getA();
         BigInteger hValue = elGamal.getH();
 
-        p.setText(pValue.toString());
-        g.setText(gValue.toString());
-        a.setText(aValue.toString());
-        h.setText(hValue.toString());
+        p.setText(pValue.toString(16));
+        g.setText(gValue.toString(16));
+        a.setText(aValue.toString(16));
+        h.setText(hValue.toString(16));
     }
 
     @FXML
