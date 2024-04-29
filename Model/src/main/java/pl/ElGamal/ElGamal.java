@@ -50,9 +50,7 @@ public class ElGamal {
     // metoda szyfruje liczbe m zgodnie z działaniem algorytmu ElGamala.
     public BigInteger[] encrypt(byte[] message) {
         BigInteger m = new BigInteger(1, message);
-        if (m.compareTo(this.p) < 0) {
-            this.r = generateR();
-        }
+        this.r = generateR();
 
         BigInteger c1 = this.g.modPow(r, this.p);
         BigInteger c2 = m.multiply(this.h.modPow(r, this.p));
@@ -70,9 +68,9 @@ public class ElGamal {
         BigInteger c2 = C[1];
 
         BigInteger c1powA = c1.modPow(this.a, this.p);
-        BigInteger inverse = c1powA.modInverse(this.p);
+        BigInteger result = c2.divide(c1powA);
 
-        return c2.multiply(inverse).mod(this.p).toByteArray();
+        return result.toByteArray();
     }
 
     // gettery potrzebne do controllera.
