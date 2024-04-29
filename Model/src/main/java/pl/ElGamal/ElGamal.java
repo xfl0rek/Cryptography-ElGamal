@@ -23,10 +23,7 @@ public class ElGamal {
 
     // metoda zwraca losową liczbę g.
     private BigInteger generateG() {
-        do {
-            this.g = new BigInteger(p.bitLength(), new Random());
-        } while (this.g.compareTo(BigInteger.ONE) <= 0 || this.g.compareTo(p.subtract(BigInteger.ONE)) >= 0);
-
+        this.g = new BigInteger(KEY_LENGTH, new SecureRandom());
         return this.g;
     }
 
