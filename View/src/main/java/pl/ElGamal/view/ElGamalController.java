@@ -78,10 +78,10 @@ public class ElGamalController {
         String[] content = readText.getText().split("\n");
         BigInteger c1 = new BigInteger(content[0], 16);
         BigInteger c2 = new BigInteger(content[1], 16);
-        BigInteger[] encrypted = {c1, c2};
-        byte[] decrypted = elGamal.decrypt(encrypted);
-        String result = new String(decrypted, StandardCharsets.UTF_8);
-        writeText.setText(result);
+        BigInteger[] C = {c1, c2};
+        byte[] decrypted = elGamal.decrypt(C);
+        String D = new String(decrypted, StandardCharsets.UTF_8);
+        writeText.setText(D);
     }
 
     @FXML
@@ -115,7 +115,34 @@ public class ElGamalController {
     }
 
     @FXML
-    public void decryptFile() {
-
+    public void decryptFile() throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Proszę wybrać plik.");
+        File file2 = fileChooser.showOpenDialog(new Stage());
+        if (file2 != null) {
+            byte[] content = Files.readAllBytes(Paths.get(file2.getPath()));
+            String[] parts = new String(content).split("\n");
+            BigInteger c1 = new BigInteger(parts[0]);
+            BigInteger c2 = new BigInteger(parts[1]);
+            BigInteger[] C = {c1, c2};
+            byte[] decrypted = elGamal.decrypt(C);
+            FileChooser.ExtensionFilter txtFilter = new FileChooser.ExtensionFilter("TXT (*.txt)", "*.txt");
+            fileChooser.getExtensionFilters().add(txtFilter);
+            FileChooser.ExtensionFilter pdfFilter = new FileChooser.ExtensionFilter("PDF (*.pdf)", "*.pdf");
+            fileChooser.getExtensionFilters().add(pdfFilter);
+            FileChooser.ExtensionFilter webpFilter = new FileChooser.ExtensionFilter("WebP (*.webp)", "*.webp");
+            fileChooser.getExtensionFilters().add(webpFilter);
+            FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG (*.png)", "*.png");
+            fileChooser.getExtensionFilters().add(pngFilter);
+            fileChooser.setTitle("Zapisz plik");
+            file = fileChooser.showSaveDialog(new Stage());
+            decryptFileStatus.setText("Udało się odszyfrować plik.");
+            try (FileOutputStream fos = new FileOutputStream(file)) {
+                fos.write(decrypted);
+            } catch (Exception e) {
+                e.printStackTrace();
+                decryptFileStatus.setText("Nie udało się odszyfrować pliku.");
+            }
+        }
     }
 }
