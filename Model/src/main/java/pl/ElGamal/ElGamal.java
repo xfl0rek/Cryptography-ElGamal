@@ -9,13 +9,14 @@ public class ElGamal {
     private BigInteger a;
     private BigInteger h;
     private BigInteger r;
+    private final int KEY_LENGTH = 510;
 
     // p, g, h - wygenerowane klucze publiczne.
     // a - wygenerowany klucz prywatny.
 
     // metoda zwraca losową liczbę pierwszą p.
     private BigInteger generateP() {
-        this.p = BigInteger.probablePrime(256, new Random());
+        this.p = BigInteger.probablePrime(KEY_LENGTH + 2, new Random());
         return this.p;
     }
 
