@@ -74,7 +74,8 @@ public class ElGamalController {
         String text = writeText.getText();
         byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
         BigInteger[] encryptedText = elGamal.encrypt(bytes);
-        readText.setText(bigIntegerArrayToHexString(encryptedText));
+        String result = encryptedText[0].toString(16) + '\n' + encryptedText[1].toString(16);
+        readText.setText(result);
     }
 
     @FXML
