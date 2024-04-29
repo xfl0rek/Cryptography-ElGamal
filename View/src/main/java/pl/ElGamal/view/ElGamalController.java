@@ -80,10 +80,13 @@ public class ElGamalController {
 
     @FXML
     public void decryptMessage() {
-        String encryptedText = readText.getText();
-        BigInteger[] message = hexStringToBigIntegerArray(encryptedText);
-        byte[] decryptedText = elGamal.decrypt(message);
-        writeText.setText(new String(decryptedText, StandardCharsets.UTF_8));
+        String[] content = readText.getText().split("\n");
+        BigInteger c1 = new BigInteger(content[0], 16);
+        BigInteger c2 = new BigInteger(content[1], 16);
+        BigInteger[] encrypted = {c1, c2};
+        byte[] decrypted = elGamal.decrypt(encrypted);
+        String result = new String(decrypted, StandardCharsets.UTF_8);
+        writeText.setText(result);
     }
 
     @FXML
