@@ -2,7 +2,6 @@ package pl.ElGamal;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.Random;
 
 public class ElGamal {
     private BigInteger p;
@@ -45,11 +44,7 @@ public class ElGamal {
 
     //metoda generuje liczbę r potrzebną do szyfrowania.
     private BigInteger generateR() {
-        do {
-            this.r = new BigInteger(this.p.bitLength(), new Random());
-        } while (this.r.compareTo(BigInteger.ONE) <= 0 || this.r.compareTo(this.p.subtract(BigInteger.ONE)) >= 0);
-
-        return this.r;
+        return this.r = new BigInteger(KEY_LENGTH - 10, new SecureRandom());
     }
 
     // metoda szyfruje liczbe m zgodnie z działaniem algorytmu ElGamala.
