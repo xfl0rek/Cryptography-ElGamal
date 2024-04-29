@@ -17,20 +17,17 @@ public class ElGamal {
 
     // metoda zwraca losową liczbę pierwszą p.
     private BigInteger generateP() {
-        this.p = BigInteger.probablePrime(KEY_LENGTH + 2, new SecureRandom());
-        return this.p;
+        return this.p = BigInteger.probablePrime(KEY_LENGTH + 2, new SecureRandom());
     }
 
     // metoda zwraca losową liczbę g.
     private BigInteger generateG() {
-        this.g = new BigInteger(KEY_LENGTH, new SecureRandom());
-        return this.g;
+        return this.g = new BigInteger(KEY_LENGTH, new SecureRandom());
     }
 
     // metoda znajduje liczbe a.
     private BigInteger generateA() {
-        this.a = new BigInteger(KEY_LENGTH, new SecureRandom());
-        return this.a;
+        return this.a = new BigInteger(KEY_LENGTH, new SecureRandom());
     }
 
     // metoda oblicza liczbę h.
