@@ -10,28 +10,24 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="568.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.ElGamal.view.ElGamalController">
    <children>
       <Label layoutX="294.0" layoutY="85.0" prefHeight="18.0" prefWidth="226.0" />
-      <TextField fx:id="p" layoutX="31.0" layoutY="32.0" prefHeight="26.0" prefWidth="420.0" />
+      <TextField fx:id="p" layoutX="31.0" layoutY="32.0" prefHeight="26.0" prefWidth="552.0" />
       <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klucze" />
       <Text layoutX="14.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="p" />
-      <TextField fx:id="g" layoutX="31.0" layoutY="72.0" prefHeight="26.0" prefWidth="420.0" />
+      <TextField fx:id="g" layoutX="31.0" layoutY="72.0" prefHeight="26.0" prefWidth="552.0" />
       <Text layoutX="14.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="g" />
-      <TextField fx:id="a" layoutX="31.0" layoutY="114.0" prefHeight="26.0" prefWidth="420.0" />
+      <TextField fx:id="a" layoutX="31.0" layoutY="114.0" prefHeight="26.0" prefWidth="552.0" />
       <Text layoutX="14.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="a" />
-      <TextField fx:id="h" layoutX="31.0" layoutY="154.0" prefHeight="26.0" prefWidth="420.0" />
+      <TextField fx:id="h" layoutX="31.0" layoutY="154.0" prefHeight="26.0" prefWidth="552.0" />
       <Text layoutX="14.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="h" />
-      <Button layoutX="473.0" layoutY="90.0" mnemonicParsing="false" onAction="#generateKeys" text="Generuj klucze" />
-      <TextArea fx:id="writeText" layoutX="31.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" />
-      <TextArea fx:id="readText" layoutX="368.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button layoutX="268.0" layoutY="246.0" mnemonicParsing="false" onAction="#encryptMessage" text="Szyfruj" />
-      <Button layoutX="262.0" layoutY="286.0" mnemonicParsing="false" onAction="#decryptMessage" text="Deszyfruj" />
-      <Button layoutX="61.0" layoutY="434.0" mnemonicParsing="false" onAction="#decodedInputFileButtonClick" text="Wybierz plik do odczytu" />
-      <Button layoutX="276.0" layoutY="434.0" mnemonicParsing="false" onAction="#encryptFileButtonClick" text="Szyfruj   " />
-      <Button layoutX="402.0" layoutY="434.0" mnemonicParsing="false" onAction="#encodedOutputFileButtonClick" text="Wybierz plik do zapisu  " />
-      <Text layoutX="249.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Operacje na plikach" />
-      <Label fx:id="encryptFileStatus" layoutX="206.0" layoutY="470.0" prefHeight="18.0" prefWidth="193.0" />
-      <Button layoutX="61.0" layoutY="501.0" mnemonicParsing="false" onAction="#decodedOutputFileButtonClick" text="Wybierz plik do zapisu  " />
-      <Button layoutX="276.0" layoutY="501.0" mnemonicParsing="false" onAction="#decryptFileButtonClick" text="Deszyfruj" />
-      <Button layoutX="402.0" layoutY="501.0" mnemonicParsing="false" onAction="#encodedInputFileButtonClick" text="Wybierz plik do odczytu" />
-      <Label fx:id="decryptFileStatus" layoutX="206.0" layoutY="537.0" prefHeight="18.0" prefWidth="193.0" />
+      <Button layoutX="252.0" layoutY="204.0" mnemonicParsing="false" onAction="#generateKeys" text="Generuj klucze" />
+      <TextArea fx:id="writeText" layoutX="32.0" layoutY="243.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="readText" layoutX="369.0" layoutY="243.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="269.0" layoutY="303.0" mnemonicParsing="false" onAction="#encryptMessage" text="Szyfruj" />
+      <Button layoutX="263.0" layoutY="343.0" mnemonicParsing="false" onAction="#decryptMessage" text="Deszyfruj" />
+      <Button layoutX="19.0" layoutY="474.0" mnemonicParsing="false" onAction="#encryptFile" text="Szyfruj   " />
+      <Text layoutX="247.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Operacje na plikach" />
+      <Label fx:id="encryptFileStatus" layoutX="98.0" layoutY="477.0" prefHeight="18.0" prefWidth="193.0" />
+      <Button layoutX="17.0" layoutY="528.0" mnemonicParsing="false" onAction="#decryptFile" text="Deszyfruj" />
+      <Label fx:id="decryptFileStatus" layoutX="98.0" layoutY="531.0" prefHeight="18.0" prefWidth="193.0" />
    </children>
 </AnchorPane>
