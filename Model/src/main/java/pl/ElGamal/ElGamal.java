@@ -29,10 +29,7 @@ public class ElGamal {
 
     // metoda znajduje liczbe a.
     private BigInteger generateA() {
-        do {
-            this.a = new BigInteger(this.p.bitLength(), new Random());
-        } while (this.a.compareTo(BigInteger.ONE) <= 0 || this.a.compareTo(this.p.subtract(BigInteger.ONE)) >= 0);
-
+        this.a = new BigInteger(KEY_LENGTH, new SecureRandom());
         return this.a;
     }
 
