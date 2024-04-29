@@ -1,6 +1,7 @@
 package pl.ElGamal;
 
 import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class ElGamal {
@@ -16,7 +17,7 @@ public class ElGamal {
 
     // metoda zwraca losową liczbę pierwszą p.
     private BigInteger generateP() {
-        this.p = BigInteger.probablePrime(KEY_LENGTH + 2, new Random());
+        this.p = BigInteger.probablePrime(KEY_LENGTH + 2, new SecureRandom());
         return this.p;
     }
 
