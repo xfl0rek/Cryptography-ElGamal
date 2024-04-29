@@ -57,11 +57,11 @@ public class ElGamal {
         BigInteger c1 = this.g.modPow(r, this.p);
         BigInteger c2 = m.multiply(this.h.modPow(r, this.p));
 
-        BigInteger[] result = new BigInteger[2];
-        result[0] = c1;
-        result[1] = c2;
+        BigInteger[] C = new BigInteger[2];
+        C[0] = c1;
+        C[1] = c2;
 
-        return result;
+        return C;
     }
 
     //metoda deszyfruje zgodnie z działaniem algorytmu ElGamala.
@@ -70,9 +70,9 @@ public class ElGamal {
         BigInteger c2 = C[1];
 
         BigInteger c1powA = c1.modPow(this.a, this.p);
-        BigInteger result = c2.divide(c1powA);
+        BigInteger D = c2.divide(c1powA);
 
-        return result.toByteArray();
+        return D.toByteArray();
     }
 
     // gettery potrzebne do controllera.

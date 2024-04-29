@@ -68,8 +68,8 @@ public class ElGamalController {
     public void encryptMessage() {
         String text = writeText.getText();
         byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
-        BigInteger[] encryptedText = elGamal.encrypt(bytes);
-        String result = encryptedText[0].toString(16) + '\n' + encryptedText[1].toString(16);
+        BigInteger[] C = elGamal.encrypt(bytes);
+        String result = C[0].toString(16) + '\n' + C[1].toString(16);
         readText.setText(result);
     }
 
@@ -91,8 +91,8 @@ public class ElGamalController {
         File file2 = fileChooser.showOpenDialog(new Stage());
         if (file2 != null) {
             byte[] content = Files.readAllBytes(Paths.get(file2.getPath()));
-            BigInteger[] encryptedFile = elGamal.encrypt(content);
-            String result = encryptedFile[0].toString() + '\n' + encryptedFile[1].toString();
+            BigInteger[] C = elGamal.encrypt(content);
+            String result = C[0].toString() + '\n' + C[1].toString();
             byte[] encryptedBytes = result.getBytes(StandardCharsets.UTF_8);
             fileChooser.setTitle("Zapisz plik");
             file = fileChooser.showSaveDialog(new Stage());
